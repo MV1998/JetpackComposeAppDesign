@@ -9,6 +9,7 @@ import com.example.compose.rally.app5.models.Customer
 import com.example.compose.rally.app5.models.Group
 import com.example.compose.rally.app5.models.attendance_reason.ReasonModel
 import com.google.gson.Gson
+import org.jetbrains.annotations.VisibleForTesting
 
 class AttendanceViewModel : ViewModel() {
 
@@ -25,7 +26,8 @@ class AttendanceViewModel : ViewModel() {
         attendance[groupIndex] = group.copy(isExpanded = !group.isExpanded)
     }
 
-    fun onPresentAbsentClick(
+    @VisibleForTesting
+    internal fun onPresentAbsentClick(
         groupIndex: Int,
         customerIndex: Int,
         customer: Customer,
@@ -45,7 +47,8 @@ class AttendanceViewModel : ViewModel() {
         validateSubmission()
     }
 
-    fun onSpinnerHideAndShowClick(
+    @VisibleForTesting
+    internal fun onSpinnerHideAndShowClick(
         groupIndex: Int,
         customerIndex: Int,
         customer: Customer,
@@ -57,7 +60,8 @@ class AttendanceViewModel : ViewModel() {
         validateSubmission()
     }
 
-    fun onDropDownMenuItemClick(
+    @VisibleForTesting
+    internal fun onDropDownMenuItemClick(
         groupIndex: Int,
         customerIndex: Int,
         customer: Customer,
@@ -71,7 +75,7 @@ class AttendanceViewModel : ViewModel() {
         validateSubmission()
     }
 
-   private fun validateSubmission() {
+    private fun validateSubmission() {
         // Note : Try to solve this problem with optimum way.
 
         //if n will be less than 10K this is optimal approach.
