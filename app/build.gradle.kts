@@ -1,20 +1,25 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kspandroid)
+    alias(libs.plugins.dagger.hilt.android)
+    id("kotlin-kapt")
+    kotlin("plugin.serialization")
 }
 
 android {
-    namespace = "com.mohitvarma.jetpackcomposeappdesign"
+    namespace = "com.example.jetpackcomposeuidesigns"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.mohitvarma.jetpackcomposeappdesign"
+        applicationId = "com.example.jetpackcomposeuidesigns"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+       // testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.jetpackcomposeuidesigns.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -59,14 +64,58 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.room.ktx)
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation(libs.logging.interceptor)
+    implementation(libs.gson)
     implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.room.runtime)
+
+
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.androidx.core.testing)
+
+
+    androidTestImplementation(libs.androidx.core.testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation("androidx.navigation:navigation-compose:2.8.1")
+    ksp(libs.room.compiler)
+
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    implementation(libs.androidx.hilt.navigation.compose)
+  //  implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+
+    // viewmodel
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    // viewmodel utilities for compose
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
+    //livedata
+    implementation (libs.androidx.lifecycle.livedata.ktx)
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.51.1")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.51.1")
+
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.7.5")
+}
+
+kapt {
+    correctErrorTypes = true
 }
